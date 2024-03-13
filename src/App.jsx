@@ -5,11 +5,9 @@ import New from './pages/New';
 import Edit from './pages/Edit';
 import Diary from './pages/Diary';
 import NotFound from './pages/NotFound';
-import emotion1 from './assets/emotion1.png';
-import emotion2 from './assets/emotion2.png';
-import emotion3 from './assets/emotion3.png';
-import emotion4 from './assets/emotion4.png';
-import emotion5 from './assets/emotion5.png';
+import { getEmotionImage } from './util/get-emotion-img';
+import Button from './components/common/Button';
+import Header from './components/common/Header';
 
 function App() {
   // 동적 경로: 동적인 데이터를 포함하고 있는 경로
@@ -20,26 +18,31 @@ function App() {
 
   // useNavigate를 사용하여 페이지 이동
   const nav = useNavigate();
-  const onClick = () => {
-    nav('/new');
-  };
+
   return (
     <>
-      <div>
-        <img src={emotion1} />
-        <img src={emotion2} />
-        <img src={emotion3} />
-        <img src={emotion4} />
-        <img src={emotion5} />
-      </div>
-      <div>
-        {/* Link 태그를 사용하여 페이지 이동 */}
-        <Link to={'/'}>home</Link>
-        <Link to={'/new'}>new</Link>
-        <Link to={'/diary'}>diary</Link>
-        <Link to={'/edit'}>edit</Link>
-      </div>
-      <button onClick={onClick}>newPage로 이동</button>
+      <Header
+        title={'Header'}
+        leftChild={<Button text={'<'} />}
+        rightChild={<Button text={'>'} />}
+      />
+
+      <Button
+        type={'DEFAULT'}
+        text={123}
+        onClick={() => console.log('123123')}
+      />
+      <Button
+        type={'POSITIVE'}
+        text={123}
+        onClick={() => console.log('123123')}
+      />
+      <Button
+        type={'NEGATIVE'}
+        text={123}
+        onClick={() => console.log('123123')}
+      />
+
       <Routes>
         {/* Route를 통한 경로 설정 */}
         <Route path="/" element={<Home />} />
