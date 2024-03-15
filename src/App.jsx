@@ -37,7 +37,6 @@ const reducer = (state, action) => {
       return [action.data, ...state];
     case 'UPDATE':
       return state.map((item) =>
-        // 타입이 다를 수 있기 때문에 혹시 모를 오류를 방지하기 위해 String메서드로 묶음
         String(item.id) === String(action.data.id) ? action.data : item
       );
     case 'DELETE':
@@ -46,12 +45,9 @@ const reducer = (state, action) => {
       return state;
   }
 };
-
-// 하나의 일기 내부에는 날짜, 감정, 일기 내용이 필요함
 function App() {
   const [data, dispatch] = useReducer(reducer, mokData);
 
-  // 새로운 일기 추가
   const idRef = useRef(3);
   const onCreate = (createdDate, emotionId, content) => {
     dispatch({
@@ -65,7 +61,6 @@ function App() {
     });
   };
 
-  // 기존 일기 수정
   const onUpdate = (createdDate, emotionId, content) => {
     dispatch({
       type: 'UPDATE',
@@ -78,7 +73,6 @@ function App() {
     });
   };
 
-  // 기존 일기 삭제
   const onDelete = (id) => {
     dispatch({
       type: 'DELETE',
