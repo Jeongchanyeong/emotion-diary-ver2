@@ -61,11 +61,11 @@ function App() {
     });
   };
 
-  const onUpdate = (createdDate, emotionId, content) => {
+  const onUpdate = (id, createdDate, emotionId, content) => {
     dispatch({
       type: 'UPDATE',
       data: {
-        id: idRef.current++,
+        id,
         createdDate,
         emotionId,
         content,
