@@ -6,12 +6,15 @@ import { useNavigate } from 'react-router-dom';
 import { DiaryDispatchContext } from '../App';
 import { useContext } from 'react';
 import useDiary from '../hooks/useDiary';
+import usePageTitle from '../hooks/\busePageTitle';
 
 const Edit = () => {
   const { onDelete, onUpdate } = useContext(DiaryDispatchContext);
   const navigate = useNavigate();
   const params = useParams();
   const curDirayItem = useDiary(params.id);
+  usePageTitle(`${params.id}번 일기 수정`);
+
   const onClickDelete = () => {
     if (
       window.confirm(

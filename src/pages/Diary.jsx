@@ -6,12 +6,15 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import useDiary from '../hooks/useDiary';
 import { getStringedDate } from '../util/get-stringed-date';
+import usePageTitle from '../hooks/\busePageTitle';
 
 const Diary = () => {
   // params에 저장된 데이터를 불러오면 됨
   const params = useParams();
   const curDirayItem = useDiary(params.id);
   const navigate = useNavigate();
+
+  usePageTitle(`${params.id}번 일기`);
 
   if (!curDirayItem) {
     return <div>데이터 로딩중..</div>;
