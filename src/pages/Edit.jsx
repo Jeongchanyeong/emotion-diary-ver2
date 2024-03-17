@@ -1,32 +1,17 @@
-import React, { useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Header from '../components/common/Header';
 import Button from '../components/common/Button';
 import Editor from '../components/Editor';
 import { useNavigate } from 'react-router-dom';
-import { DiaryDispatchContext, DiaryStateContext } from '../App';
-import { useEffect, useContext } from 'react';
+import { DiaryDispatchContext } from '../App';
+import { useContext } from 'react';
+import useDiary from '../hooks/useDiary';
 
 const Edit = () => {
-  const [currentDiaryItem, setCurrentDiaryItem] = useState();
   const { onDelete, onUpdate } = useContext(DiaryDispatchContext);
-  const data = useContext(DiaryStateContext);
-
   const navigate = useNavigate();
   const params = useParams();
-
-  useEffect(() => {
-    const currentDirayItem = data.find(
-      (item) => String(item.id) === String(params.id)
-    );
-    if (!currentDirayItem) {
-      window.alert('존재하지 않는 일기입니다.');
-      navigate('/', { replace: true });
-    }
-
-    setCurrentDiaryItem(currentDirayItem);
-  }, [params.id, data]);
-
+  const curDirayItem = useDiary(params.id);
   const onClickDelete = () => {
     if (
       window.confirm(
@@ -63,7 +48,7 @@ const Edit = () => {
         }
         title={'일기 수정하기'}
       />
-      <Editor initData={currentDiaryItem} onSubmit={onSubmit} />
+      <Editor initData={curDirayItem} onSubmit={onSubmit} />
     </div>
   );
 };

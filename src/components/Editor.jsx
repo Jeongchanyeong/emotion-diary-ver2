@@ -4,30 +4,9 @@ import EmotionItem from './EmotionItem';
 import Button from './common/Button';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-const emotionList = [
-  { emotionId: 1, emotionName: '완전 좋음' },
-  { emotionId: 2, emotionName: '좋음' },
-  { emotionId: 3, emotionName: '그럭저럭' },
-  { emotionId: 4, emotionName: '나쁨' },
-  { emotionId: 5, emotionName: '끔찍함' },
-];
-
+import { emotionList } from '../util/contants';
+import { getStringedDate } from '../util/get-stringed-date';
 // input에 value값으로 넣을 시 날짜를 인식하지 못함 (문자열로 변환해줘야함)
-const getStringedDate = (targetDate) => {
-  let year = targetDate.getFullYear();
-  let month = targetDate.getMonth() + 1;
-  let date = targetDate.getDate();
-
-  // 날짜 -> YYYY-MM-DD 형식을 띄워야하기 때문에 0을 붙여주지 않으면 오류가 생겨 반영되지 않는다.
-  if (month < 10) {
-    month = `0${month}`;
-  }
-  if (date < 10) {
-    date = `0${date}`;
-  }
-
-  return `${year}-${month}-${date}`;
-};
 
 // New와 Edit에서 다루는 컴포넌틍 구조가 동일하지만 버튼을 눌렀을 때 처리하는 로직이 다르므로, 페이지에서 Editor로 onSubmit prop을 넘겨주어 페이지별 기능을 분리한다.
 const Editor = ({ initData, onSubmit }) => {
