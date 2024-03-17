@@ -2,7 +2,7 @@ import React from 'react';
 import './Editor.css';
 import EmotionItem from './EmotionItem';
 import Button from './common/Button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 const emotionList = [
   { emotionId: 1, emotionName: '완전 좋음' },
@@ -30,8 +30,18 @@ const getStringedDate = (targetDate) => {
 };
 
 // New와 Edit에서 다루는 컴포넌틍 구조가 동일하지만 버튼을 눌렀을 때 처리하는 로직이 다르므로, 페이지에서 Editor로 onSubmit prop을 넘겨주어 페이지별 기능을 분리한다.
-const Editor = ({ onSubmit }) => {
+const Editor = ({ initData, onSubmit }) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (initData) {
+      setInput({
+        ...initData,
+        createdDate: new Date(Number(initData.createdDate)),
+      });
+    }
+  }, [initData]);
+
   const [input, setInput] = useState({
     createdDate: new Date(),
     emotionId: 3,

@@ -42,6 +42,7 @@ const DiaryList = ({ monthlyData }) => {
           }}
         />
       </div>
+
       <div className="list_wrapper">
         {sortedData.map((item) => (
           <DiaryItem key={item.id} {...item} />
